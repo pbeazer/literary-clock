@@ -88,7 +88,7 @@ def main():
 	image.paste(quoteImage, (0, 80))
 
 	# If not our first try, also write the current time
-	if !firstTry:
+	if not firstTry:
 		now_time = now.strftime('%I:%M %p')
 		draw_time = ImageDraw.Draw(image)
 		time_font = ImageFont.truetype('Literata72pt-Regular.ttf', 30)
