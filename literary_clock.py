@@ -20,13 +20,13 @@ def getTimeQuotes(currentTime,depth):
 	quotes_path = 'images/metadata/quote_%s_*_credits.png' % hour_minute
 	quotes = glob(quotes_path)
 	# if len(quotes) == 0:
-	# 	# print("No quotes for "+hour_minute)
+		# print("No quotes for "+hour_minute)
 
-	# 	# Call the same request, but 1 minute ago
-	# 	return getTimeQuotes(currentTime-timedelta(minutes=1),depth+1)
-	# else:
-		# print("Got quote for "+hour_minute)
-	return quotes, firstTry
+		# Call the same request, but 1 minute ago
+		return getTimeQuotes(currentTime-timedelta(minutes=1),depth+1)
+	else:
+		#print("Got quote for "+hour_minute)
+		return quotes, firstTry
 
 
 def main():
