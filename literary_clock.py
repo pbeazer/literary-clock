@@ -9,11 +9,7 @@ from random import randrange
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
-libdir = "./lib/e-Paper/RaspberryPi_JetsonNano/python/lib"
-if os.path.exists(libdir):
-    sys.path.append(libdir)
-
-import epd7in5_V2 as epd7in5
+from waveshare import epd7in5_V2 as epd7in5
 from weather_providers import openweathermap
 
 def format_weather_description(weather_description):

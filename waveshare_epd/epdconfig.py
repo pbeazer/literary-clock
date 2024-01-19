@@ -32,6 +32,8 @@ import logging
 import sys
 import time
 
+logger = logging.getLogger(__name__)
+
 
 class RaspberryPi:
     # Pin definition
@@ -45,9 +47,7 @@ class RaspberryPi:
         import RPi.GPIO
 
         self.GPIO = RPi.GPIO
-
-        # SPI device, bus = 0, device = 0
-        self.SPI = spidev.SpiDev(0, 0)
+        self.SPI = spidev.SpiDev()
 
     def digital_write(self, pin, value):
         self.GPIO.output(pin, value)
@@ -71,15 +71,18 @@ class RaspberryPi:
         self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
+
+        # SPI device, bus = 0, device = 0
+        self.SPI.open(0, 0)
         self.SPI.max_speed_hz = 4000000
         self.SPI.mode = 0b00
         return 0
 
     def module_exit(self):
-        logging.debug("spi end")
+        logger.debug("spi end")
         self.SPI.close()
 
-        logging.debug("close 5V, Module enters 0 power consumption ...")
+        logger.debug("close 5V, Module enters 0 power consumption ...")
         self.GPIO.output(self.RST_PIN, 0)
         self.GPIO.output(self.DC_PIN, 0)
 
@@ -135,10 +138,10 @@ class JetsonNano:
         return 0
 
     def module_exit(self):
-        logging.debug("spi end")
+        logger.debug("spi end")
         self.SPI.SYSFS_software_spi_end()
 
-        logging.debug("close 5V, Module enters 0 power consumption ...")
+        logger.debug("close 5V, Module enters 0 power consumption ...")
         self.GPIO.output(self.RST_PIN, 0)
         self.GPIO.output(self.DC_PIN, 0)
 
