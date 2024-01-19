@@ -9,7 +9,7 @@ from random import randrange
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
-from waveshare import epd7in5_V2 as epd7in5
+from waveshare_epd import epd7in5_V2 as epd7in5
 from weather_providers import openweathermap
 
 def format_weather_description(weather_description):
