@@ -19,14 +19,14 @@ def getTimeQuotes(currentTime,depth):
 
 	quotes_path = 'images/metadata/quote_%s_*_credits.png' % hour_minute
 	quotes = glob(quotes_path)
-	if len(quotes) == 0:
-		# print("No quotes for "+hour_minute)
+	# if len(quotes) == 0:
+	# 	# print("No quotes for "+hour_minute)
 
-		# Call the same request, but 1 minute ago
-		return getTimeQuotes(currentTime-timedelta(minutes=1),depth+1)
-	else:
+	# 	# Call the same request, but 1 minute ago
+	# 	return getTimeQuotes(currentTime-timedelta(minutes=1),depth+1)
+	# else:
 		# print("Got quote for "+hour_minute)
-		return quotes, firstTry
+	return quotes, firstTry
 
 
 def main():
@@ -41,11 +41,11 @@ def main():
 	image.paste(quoteImage, (0, 80))
 
 	# If not our first try, also write the current time
-	if not firstTry:
-		now_time = now.strftime('%I:%M %p')
-		draw_time = ImageDraw.Draw(image)
-		time_font = ImageFont.truetype('Literata72pt-Regular.ttf', 30)
-		draw_time.text((670, 30), now_time, font=time_font, fill=0)
+	#if not firstTry:
+	now_time = now.strftime('%I:%M %p')
+	draw_time = ImageDraw.Draw(image)
+	time_font = ImageFont.truetype('Literata72pt-Regular.ttf', 30)
+	draw_time.text((670, 30), now_time, font=time_font, fill=0)
 
 	today = now.strftime('%a, %B, %d')
 	dayFont = ImageFont.truetype('Literata72pt-Regular.ttf', 48)
