@@ -8,19 +8,7 @@ from glob import glob
 from random import randrange
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-
 from waveshare_epd import epd7in5_V2 as epd7in5
-from weather_providers import openweathermap
-
-def format_weather_description(weather_description):
-    if len(weather_description) < 20:
-        return {1: weather_description, 2: ''}
-
-    splits = textwrap.fill(weather_description, 20, break_long_words=False,
-                           max_lines=2, placeholder='...').split('\n')
-    weather_dict = {1: splits[0]}
-    weather_dict[2] = splits[1] if len(splits) > 1 else ''
-    return weather_dict
 
 def getTimeQuotes(currentTime,depth):
 	hour_minute = currentTime.strftime('%H%M')
@@ -62,7 +50,7 @@ def main():
 	today = now.strftime('%a, %B, %d')
 	dayFont = ImageFont.truetype('Literata72pt-Regular.ttf', 48)
 	drawImage = ImageDraw.Draw(image)
-	drawImage.text((20, 0), today, font=dayFont, fill=0)
+	drawImage.text((10, 0), today, font=dayFont, fill=0)
 	drawImage.line([(0, 78), (800, 78)], fill=0, width=4)
 	#drawImage.line([(225, 0), (225, 78)], fill=0, width=4)
 	return image
