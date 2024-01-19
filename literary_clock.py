@@ -62,9 +62,9 @@ def main():
 	today = now.strftime('%a, %B, %d')
 	dayFont = ImageFont.truetype('Literata72pt-Regular.ttf', 48)
 	drawImage = ImageDraw.Draw(image)
-	drawImage.text((250, 10), today, font=dayFont, fill=0)
-	#drawImage.line([(0, 78), (800, 78)], fill=0, width=4)
-	drawImage.line([(225, 0), (225, 78)], fill=0, width=4)
+	drawImage.text((20, 10), today, font=dayFont, fill=0)
+	drawImage.line([(0, 78), (800, 78)], fill=0, width=4)
+	#drawImage.line([(225, 0), (225, 78)], fill=0, width=4)
 	return image
 
 if __name__ == '__main__':
