@@ -51,7 +51,7 @@ def main():
 	dayFont = ImageFont.truetype('Literata72pt-Regular.ttf', 48)
 	drawImage = ImageDraw.Draw(image)
 	drawImage.text((10, 0), today, font=dayFont, fill=0)
-	drawImage.line([(0, 78), (800, 78)], fill=0, width=4)
+	drawImage.line([(0, 78), (800, 78)], fill=0, width=2)
 	#drawImage.line([(225, 0), (225, 78)], fill=0, width=4)
 	return image
 
