@@ -13,7 +13,7 @@ libdir = "./lib/e-Paper/RaspberryPi_JetsonNano/python/lib"
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
-from waveshare_epd import epd7in5_V2 as epd7in5
+import epd7in5_V2 as epd7in5
 from weather_providers import openweathermap
 
 def format_weather_description(weather_description):
@@ -46,38 +46,7 @@ def getTimeQuotes(currentTime,depth):
 
 
 def main():
-
-	openweathermap_apikey = os.getenv("OPENWEATHERMAP_APIKEY")
-	location_lat = os.getenv("WEATHER_LATITUDE")
-	location_long = os.getenv("WEATHER_LONGITUDE")
-
-	weather_provider = openweathermap.OpenWeatherMap(
-		openweathermap_apikey,
-		location_lat,
-		location_long,
-		"imperial"
-	)
-
-	weather = weather_provider.get_weather()
-
-	degrees = "°F"
-
-	weather_desc = format_weather_description(weather["description"])
-
-	output_dict = {
-		'LOW_ONE': "{}{}".format(str(round(weather['temperatureMin'])), degrees),
-		'HIGH_ONE': "{}{}".format(str(round(weather['temperatureMax'])), degrees),
-		'ICON_ONE': weather["icon"],
-		'WEATHER_DESC_1': weather_desc[1],
-		'WEATHER_DESC_2': weather_desc[2]
-	}
-
-
 	image = Image.new(mode='1', size=(800, 480), color=255)
-	iconPath = 'icons/%s.xbm' % output_dict['ICON_ONE']
-	iconImage = ImageOps.invert(Image.open(iconPath).resize((64, 64)).convert('L'))
-	image.paste(iconImage, (20, 5))
-
 	now = datetime.now()
 
 	quotes,firstTry=getTimeQuotes(now,0)
@@ -98,10 +67,7 @@ def main():
 	dayFont = ImageFont.truetype('Literata72pt-Regular.ttf', 48)
 	drawImage = ImageDraw.Draw(image)
 	drawImage.text((250, 10), today, font=dayFont, fill=0)
-	tempFont = ImageFont.truetype('Literata72pt-Regular.ttf', 24)
-	temp = '%s / %s' % (output_dict['HIGH_ONE'], output_dict['LOW_ONE'])
-	drawImage.text((100, 20), temp, font=tempFont, fill=0)
-	drawImage.line([(0, 78), (800, 78)], fill=0, width=4)
+	#drawImage.line([(0, 78), (800, 78)], fill=0, width=4)
 	drawImage.line([(225, 0), (225, 78)], fill=0, width=4)
 	return image
 
