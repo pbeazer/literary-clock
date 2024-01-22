@@ -86,7 +86,7 @@ function TurnQuoteIntoImage($time, $quote, $timestring, $title, $author) {
     print "Image for " . $time .'_'. $imagenumber . "\n";
 
     // Save the image
-    imagepng($png_image, 'images/quote_'.$time.'_'.$imagenumber.'.png');
+    imagepng($png_image, '../images/quote_'.$time.'_'.$imagenumber.'.png');
 
 
     ///// METADATA /////
@@ -140,7 +140,7 @@ function TurnQuoteIntoImage($time, $quote, $timestring, $title, $author) {
         $metadataX2 = $width-($textWidth2+$margin);
         $metadataY = $height-$margin;
 
-        imagettftext($png_image, $creditFont_size, 0, $metadataX1, $metadataY-($textheight1*1.1), $black, $creditFont, $dash . $newCredits[0]);
+        imagettftext($png_image, $creditFont_size, 0, $metadataX1, $metadataY-(int)($textheight1*1.1), $black, $creditFont, $dash . $newCredits[0]);
         imagettftext($png_image, $creditFont_size, 0, $metadataX2, $metadataY, $black, $creditFont, $newCredits[1]);
         
     } else {
@@ -154,7 +154,7 @@ function TurnQuoteIntoImage($time, $quote, $timestring, $title, $author) {
     }
 
     // Save the image with metadata
-    imagepng($png_image, 'images/metadata/quote_'.$time.'_'.$imagenumber.'_credits.png');
+    imagepng($png_image, '../images/metadata/quote_'.$time.'_'.$imagenumber.'_credits.png');
 
     // Free up memory
     imagedestroy($png_image);
@@ -209,7 +209,7 @@ function fitText($quote_array, $width, $height, $font_size, $timestringStarts, $
             $textcolor = $grey;
         }
 
-        // measure the word's width
+        // measure the words width
         list($textwidth, $textheight) = measureSizeOfTextbox($font_size, $font, $word . " ");
 
         //// write every word to image, and record its position for the next word ////
@@ -231,7 +231,7 @@ function fitText($quote_array, $width, $height, $font_size, $timestringStarts, $
             # write the word to the image
             imagettftext($png_image, $font_size, 0, $position[0], $position[1], $textcolor, $font, $word);
            
-        // if the line isn't too long, just add it.
+        // if the line is not too long, just add it.
         } else {
 
             # write the word to the image
@@ -280,4 +280,4 @@ function measureSizeOfTextbox($font_size, $font_path, $text) {
 }
 
 
-?>
+
